@@ -2,6 +2,7 @@
 // info snippet
 class RockHookSnippets extends WireData implements Module {
   private $path;
+  private $file;
 
   public static function getModuleInfo() {
     return [
@@ -19,6 +20,8 @@ class RockHookSnippets extends WireData implements Module {
   public function init() {
     $this->path = $this->config->paths->root . ".vscode/";
     $this->files->mkdir($this->path);
+    $this->file = $this->path . "php.code-snippets";
+    $this->createSnippetfile();
   }
 
   /**
@@ -26,7 +29,7 @@ class RockHookSnippets extends WireData implements Module {
    * @return void
    */
   public function createSnippetfile() {
-    $file = $this->path . "php.code-snippets";
+    if(is_file($this->file)) return;
     $hooks = \TracyDebugger::getApiData('hooks');
     $content = [];
     foreach($hooks as $hook) {
@@ -60,6 +63,6 @@ class RockHookSnippets extends WireData implements Module {
       }
     }
     $content = (object)$content;
-    $this->files->filePutContents($file, json_encode($content));
+    $this->files->filePutContents($this->file, json_encode($content));
   }
 }
