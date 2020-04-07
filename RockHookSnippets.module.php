@@ -7,7 +7,7 @@ class RockHookSnippets extends WireData implements Module, ConfigurableModule {
   public static function getModuleInfo() {
     return [
       'title' => 'RockHookSnippets',
-      'version' => '0.0.1',
+      'version' => '0.0.2',
       'summary' => 'ProcessWire Hook Snippets Generator for VSCode',
       'autoload' => true,
       'singular' => true,
