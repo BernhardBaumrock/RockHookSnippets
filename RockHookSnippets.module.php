@@ -12,7 +12,7 @@ class RockHookSnippets extends WireData implements Module, ConfigurableModule {
       'autoload' => true,
       'singular' => true,
       'icon' => 'anchor',
-      'requires' => ['TracyDebugger'],
+      'requires' => ['TracyDebugger>=4.20.17'],
       'installs' => [],
     ];
   }
