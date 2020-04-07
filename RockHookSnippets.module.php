@@ -19,7 +19,6 @@ class RockHookSnippets extends WireData implements Module, ConfigurableModule {
 
   public function init() {
     $this->path = $this->config->paths->root . ".vscode/";
-    $this->files->mkdir($this->path);
     $this->file = $this->path . "php.code-snippets";
     $rhs = $this;
 
@@ -27,6 +26,7 @@ class RockHookSnippets extends WireData implements Module, ConfigurableModule {
     // create snippets file
     $config = $this->wire('config'); /** @var Config $config */
     if(in_array($config->httpHost, $this->getHosts())) {
+      $this->files->mkdir($this->path);
       if(!is_file($this->file)) $this->createSnippetfile();
       else {
         $this->addHookBefore('TracyPwApiData::newApiData', function($event) use($rhs) {
