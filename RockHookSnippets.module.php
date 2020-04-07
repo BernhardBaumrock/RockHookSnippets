@@ -22,16 +22,15 @@ class RockHookSnippets extends WireData implements Module, ConfigurableModule {
     $this->file = $this->path . "php.code-snippets";
     $rhs = $this;
 
-
     // create snippets file
     $config = $this->wire('config'); /** @var Config $config */
     if(in_array($config->httpHost, $this->getHosts())) {
       $this->files->mkdir($this->path);
       if(!is_file($this->file)) $this->createSnippetfile();
       else {
-        $this->addHookBefore('TracyPwApiData::newApiData', function($event) use($rhs) {
-          $type = $event->arguments(0);
-          if($type == 'hooks') $rhs->createSnippetfile();
+        $this->addHookAfter("Modules::refresh", function(HookEvent $event) use($rhs) {
+          $rhs->createSnippetfile();
+          $this->message('RockHookSnippets refreshed');
         });
       }
     }
