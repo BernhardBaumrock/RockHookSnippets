@@ -106,7 +106,7 @@ class RockHookSnippets extends WireData implements Module, ConfigurableModule {
   * @param InputfieldWrapper $inputfields
   */
   public function getModuleConfigInputfields($inputfields) {
-    $current = "current is ".$this->config->httpHost;
+    $current = "Current is ".$this->config->httpHost;
 
     /** @var InputfieldText $f */
     $f = $this->wire('modules')->get('InputfieldText');
